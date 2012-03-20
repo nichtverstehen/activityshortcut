@@ -1,143 +1,169 @@
 package de.nichtverstehen.util;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.content.pm.PackageInfo;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.SimpleAdapter;
+import android.view.LayoutInflater;
+import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-public class CustomizableArrayAdapter<T> extends ArrayAdapter<T> {
+public class CustomizableArrayAdapter<T> extends BaseAdapter implements Filterable {
+    private List<T> data;
+    private List<T> filteredData;
 
-    protected LayoutInflater mInflater;
-    protected int mResource;
-    protected int mDropDownResource;
-    protected int mFieldId;
+    private int resource = 0;
+    private int dropDownResource = 0;
+    private LayoutInflater inflater;
 
-    public CharSequence getItemText(T item) {
-        if (item instanceof CharSequence) {
-            return (CharSequence) item;
-        } else {
-            return item.toString();
-        }
+    private SimpleFilter filter;
+
+    public CustomizableArrayAdapter(Context context, List<T> data) {
+        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.data = this.filteredData = data;
+        this.resource = dropDownResource = resource;
+    }
+    
+    public void resetData(List<T> data) {
+        this.data = this.filteredData = data;
+        notifyDataSetChanged();
     }
 
-    public void prepareItemView(View view, T item) {
-        TextView text;
-        try {
-            if (mFieldId == 0) {
-                //  If no custom field is assigned, assume the whole resource is a TextView
-                text = (TextView) view;
-            } else {
-                //  Otherwise, find the TextView field within the layout
-                text = (TextView) view.findViewById(mFieldId);
-            }
-        } catch (ClassCastException e) {
-            Log.e("ArrayAdapter", "You must supply a resource ID for a TextView");
-            throw new IllegalStateException(
-                    "ArrayAdapter requires the resource ID to be a TextView", e);
-        }
-
-        CharSequence itemText = getItemText(item);
-        text.setText(itemText);
+    public void setViewResource(int resource) {
+        this.resource = resource;
+    }
+    public void setDropDownViewResource(int resource) {
+        this.dropDownResource = resource;
     }
 
-    private View getCustomView(int position, View convertView, ViewGroup parent,
-                                        int resource) {
-        View view;
-
-        if (convertView == null) {
-            view = mInflater.inflate(resource, parent, false);
-        } else {
-            view = convertView;
-        }
-
-        T item = getItem(position);
-        prepareItemView(view, item);
-
-        return view;
+    @Override
+    public int getCount() {
+        return filteredData.size();
     }
 
-    private void init(Context context, int resource, int textViewResourceId) {
-        mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mResource = mDropDownResource = resource;
-        mFieldId = textViewResourceId;
+    @Override
+    public T getItem(int position) {
+        return filteredData.get(position);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, convertView, parent, mResource);
+        return createView(position, convertView, parent, false);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDropDownViewResource(int resource) {
-        super.setDropDownViewResource(resource);
-        this.mDropDownResource = resource;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getCustomView(position, convertView, parent, mDropDownResource);
+        return createView(position, convertView, parent, true);
+    }
+    
+    protected int getResourceId(boolean dropDown) {
+        return dropDown ? dropDownResource : resource;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public CustomizableArrayAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
-        init(context, textViewResourceId, 0);
+    protected View createView(int position, View convertView,
+            ViewGroup parent, boolean dropDown) {
+        int viewResId = getResourceId(dropDown);
+
+        View v;
+        if (convertView == null) {
+            v = inflater.inflate(viewResId, parent, false);
+        } else {
+            v = convertView;
+        }
+
+        prepareItemView(position, getItem(position), v);
+
+        return v;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public CustomizableArrayAdapter(Context context, int resource, int textViewResourceId) {
-        super(context, resource, textViewResourceId);
-        init(context, resource, textViewResourceId);
+    protected void prepareItemView(int position, T item, View v) {
+        if (v instanceof TextView) {
+            TextView textView = (TextView) v;
+            textView.setText(getItemString(position, item));
+        }
+        else {
+            throw new IllegalStateException("CustomizableArrayAdapter should be overriden.");
+        }
+    }
+    
+    protected String getItemString(int position, T item) {
+        return item.toString();
+    }
+    
+    protected boolean filterItem(int position, T item, String prefix) {
+        if (item == null) {
+            return false;
+        }
+
+        String itemString = getItemString(position, item);
+        String[] words = itemString.split(" ");
+        int wordCount = words.length;
+
+        for (int k = 0; k < wordCount; k++) {
+            String word = words[k];
+
+            if (word.toLowerCase().startsWith(prefix)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public CustomizableArrayAdapter(Context context, int textViewResourceId, T[] objects) {
-        super(context, textViewResourceId, objects);
-        init(context, textViewResourceId, 0);
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new SimpleFilter();
+        }
+        return filter;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public CustomizableArrayAdapter(Context context, int resource, int textViewResourceId, T[] objects) {
-        super(context, resource, textViewResourceId, objects);
-        init(context, resource, textViewResourceId);
-    }
+    protected class SimpleFilter extends Filter {
 
-    /**
-     * {@inheritDoc}
-     */
-    public CustomizableArrayAdapter(Context context, int textViewResourceId, List<T> objects) {
-        super(context, textViewResourceId, objects);
-        init(context, textViewResourceId, 0);
-    }
+        @Override
+        protected FilterResults performFiltering(CharSequence prefix) {
+            List<T> orig = data;
+            List<T> items;
 
-    /**
-     * {@inheritDoc}
-     */
-    public CustomizableArrayAdapter(Context context, int resource, int textViewResourceId, List<T> objects) {
-        super(context, resource, textViewResourceId, objects);
-        init(context, resource, textViewResourceId);
+            if (prefix == null || prefix.length() == 0) {
+                items = orig;
+            }
+            else {
+                items = new ArrayList<T>();
+
+                String prefixString = prefix.toString().toLowerCase();
+                int count = orig.size();
+                for (int i = 0; i < count; i++) {
+                    T item = orig.get(i);
+                    if (filterItem(i, item, prefixString)) {
+                        items.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = items;
+            results.count = items.size();
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            data = (List<T>) results.values;
+            notifyDataSetChanged();
+        }
     }
 }

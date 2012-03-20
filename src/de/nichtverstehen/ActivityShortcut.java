@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -17,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import de.nichtverstehen.util.CustomizableArrayAdapter;
-import de.nichtverstehen.util.Predicate;
+import de.nichtverstehen.util.ListUtils;
 
 import java.util.*;
 
@@ -39,28 +40,36 @@ public class ActivityShortcut extends Activity {
         activitySpinner = (Spinner) findViewById(R.id.activity_spinner);
         final Button testButton = (Button) findViewById(R.id.test_item);
 
-        List<PackageInfo> apps = packageManager.getInstalledPackages(
-                PackageManager.GET_ACTIVITIES | PackageManager.GET_INTENT_FILTERS);
+        List<PackageInfo> apps = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
         final ApplicationArrayAdapter appsListAdapter = new ApplicationArrayAdapter(this, apps);
         appSpinner.setAdapter(appsListAdapter);
         appSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 PackageInfo appInfo = appsListAdapter.getItem(position);
-                activitySpinner.setAdapter(new ActivityArrayAdapter(ActivityShortcut.this, appInfo.activities));
+                if (appInfo.activities == null) {
+                    onNothingSelected(parent);
+                    return;
+                }
+                activitySpinner.setAdapter(new ActivityArrayAdapter(ActivityShortcut.this,
+                        Arrays.asList(appInfo.activities)));
             }
 
+            @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                activitySpinner.setAdapter(null);
+                activitySpinner.setAdapter(new ActivityArrayAdapter(ActivityShortcut.this,
+                        new ArrayList<ActivityInfo>()));
             }
         });
 
         testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 onTest();
             }
         });
 
-        IntentFilter filter = new IntentFilter(INSTALL_SHORTCUT_ACTION);
+        /*IntentFilter filter = new IntentFilter(INSTALL_SHORTCUT_ACTION);
         registerReceiver(new BroadcastReceiver() {
 
             @Override
@@ -68,7 +77,7 @@ public class ActivityShortcut extends Activity {
                 Intent shIntent = (Intent) intent.getExtras().get(Intent.EXTRA_SHORTCUT_INTENT);
                 Log.e("Act", intent.toString());
             }
-        }, filter);
+        }, filter);*/
     }
 
     @Override
@@ -135,22 +144,28 @@ public class ActivityShortcut extends Activity {
     }
 }
 
+class ResourceUtils {
+    public static CharSequence getPackageString(PackageManager pm, String pkg, int resId, ApplicationInfo app) {
+        if (resId == 0) return null;
+        return pm.getText(pkg, resId, app);
+    }
+    public static Drawable getPackageImage(PackageManager pm, String pkg, int resId, ApplicationInfo app) {
+        if (resId == 0) return null;
+        return pm.getDrawable(pkg, resId, app);
+    }
+}
+
 class ApplicationArrayAdapter extends CustomizableArrayAdapter<PackageInfo> {
     PackageManager packageManager;
 
-    private void init(Context context) {
-        setDropDownViewResource(R.layout.app_row_dropdown);
-        this.packageManager = context.getPackageManager();
-    }
-
     @Override
-    public void prepareItemView(View view, PackageInfo item) {
+    public void prepareItemView(int position, PackageInfo item, View view) {
         TextView labelView = (TextView) view.findViewById(R.id.app_label);
         ImageView iconView = (ImageView) view.findViewById(R.id.app_icon);
         TextView descriptionView = (TextView) view.findViewById(R.id.app_descr);
 
         CharSequence label = getLabel(item);
-        CharSequence description = packageManager.getText(item.packageName,
+        CharSequence description = ResourceUtils.getPackageString(packageManager, item.packageName,
                 item.applicationInfo.descriptionRes, item.applicationInfo);
         CharSequence packageName = item.packageName;
         Drawable icon = packageManager.getApplicationIcon(item.applicationInfo);
@@ -161,68 +176,49 @@ class ApplicationArrayAdapter extends CustomizableArrayAdapter<PackageInfo> {
         descriptionView.setText(info);
         iconView.setImageDrawable(icon);
     }
-
+    
     public CharSequence getLabel(PackageInfo item) {
         return packageManager.getApplicationLabel(item.applicationInfo);
     }
 
-    private Collection<PackageInfo> prepareObjects(List<PackageInfo> objects) {
+    protected List<PackageInfo> prepareData(List<PackageInfo> objects) {
         Collections.sort(objects, new Comparator<PackageInfo>() {
+            @Override
             public int compare(PackageInfo lhs, PackageInfo rhs) {
-                if (lhs.applicationInfo.labelRes != 0 && rhs.applicationInfo.labelRes != 0) {
-                    return getLabel(lhs).toString().compareTo(getLabel(rhs).toString());
+                CharSequence ll = getLabel(lhs), rl = getLabel(rhs);
+                if (ll != null && rl != null) {
+                    return ll.toString().compareTo(rl.toString());
                 }
                 else {
-                    return 0;
+                    return lhs.packageName.compareTo(rhs.packageName);
                 }
             }
         });
         return objects;
     }
 
-    public ApplicationArrayAdapter(Context context) {
-        super(context, R.layout.app_row);
-        init(context);
-    }
-
-    public ApplicationArrayAdapter(Context context, PackageInfo[] objects) {
-        super(context, R.layout.app_row);
-        init(context);
-
-        if (objects != null) {
-            addAll(prepareObjects(Arrays.asList(objects)));
-        }
-    }
-
     public ApplicationArrayAdapter(Context context, List<PackageInfo> objects) {
-        super(context, R.layout.app_row);
-        init(context);
-        if (objects != null) {
-            addAll(prepareObjects(objects));
-        }
+        super(context, new ArrayList<PackageInfo>());
+        this.packageManager = context.getPackageManager();
+        resetData(prepareData(objects));
+        setViewResource(R.layout.app_row);
+        setDropDownViewResource(R.layout.app_row_dropdown);
     }
 }
 
 class ActivityArrayAdapter extends CustomizableArrayAdapter<ActivityInfo> {
     PackageManager packageManager;
 
-    private void init(Context context) {
-        setDropDownViewResource(R.layout.app_row_dropdown);
-        this.packageManager = context.getPackageManager();
-    }
-
     @Override
-    public void prepareItemView(View view, ActivityInfo item) {
+    public void prepareItemView(int position, ActivityInfo item, View view) {
         TextView labelView = (TextView) view.findViewById(R.id.app_label);
         ImageView iconView = (ImageView) view.findViewById(R.id.app_icon);
         TextView descriptionView = (TextView) view.findViewById(R.id.app_descr);
 
         CharSequence label = getLabel(item);
-        CharSequence description = packageManager.getText(item.packageName,
-                item.descriptionRes, item.applicationInfo);
+        CharSequence description = getDescription(item);
+        Drawable icon = getIcon(item);
         CharSequence className = item.name;
-        Drawable icon = packageManager.getDrawable(item.packageName,
-                item.icon, item.applicationInfo);
 
         CharSequence title;
         CharSequence info;
@@ -243,53 +239,51 @@ class ActivityArrayAdapter extends CustomizableArrayAdapter<ActivityInfo> {
         iconView.setVisibility(icon != null ? View.VISIBLE : View.GONE);
         iconView.setImageDrawable(icon);
     }
-
+    
     public CharSequence getLabel(ActivityInfo activity) {
-        return packageManager.getText(activity.packageName,
+        return ResourceUtils.getPackageString(packageManager, activity.packageName,
                 activity.labelRes, activity.applicationInfo);
     }
 
-    private Collection<ActivityInfo> prepareObjects(List<ActivityInfo> objects) {
-        List<ActivityInfo> filtered = de.nichtverstehen.util.Collections.filter(
-                objects,
-                new Predicate<ActivityInfo>() {
+    public CharSequence getDescription(ActivityInfo activity) {
+        return ResourceUtils.getPackageString(packageManager, activity.packageName,
+                activity.descriptionRes, activity.applicationInfo);
+    }
+
+    public Drawable getIcon(ActivityInfo activity) {
+        return ResourceUtils.getPackageImage(packageManager, activity.packageName,
+                activity.icon, activity.applicationInfo);
+    }
+
+    protected List<ActivityInfo> prepareData(List<ActivityInfo> objects) {
+        List<ActivityInfo> filtered = ListUtils.filter(objects,
+                new ListUtils.Predicate<ActivityInfo>() {
+                    @Override
                     public boolean apply(ActivityInfo item) {
                         return item.exported;
                     }
                 });
         Collections.sort(filtered, new Comparator<ActivityInfo>() {
-            public int compare(ActivityInfo lhs, ActivityInfo rhs) {
-                if (lhs.labelRes != 0 && rhs.labelRes != 0) {
-                    return getLabel(lhs).toString().compareTo(getLabel(rhs).toString());
-                } else if (lhs.labelRes == 0 && rhs.labelRes == 0) {
-                    return lhs.name.compareTo(rhs.name);
-                } else {
-                    return lhs.labelRes != 0 ? -1 : 1;
+                @Override
+                public int compare(ActivityInfo lhs, ActivityInfo rhs) {
+                    CharSequence ll = getLabel(lhs), rl = getLabel(rhs);
+                    if (ll != null && rl != null) {
+                        return ll.toString().compareTo(rl.toString());
+                    } else if (ll == null && rl == null) {
+                        return lhs.name.compareTo(rhs.name);
+                    } else {
+                        return ll != null ? -1 : 1;
+                    }
                 }
-            }
-        });
+            });
         return filtered;
     }
 
-    public ActivityArrayAdapter(Context context) {
-        super(context, R.layout.app_row);
-        init(context);
-    }
-
-    public ActivityArrayAdapter(Context context, ActivityInfo[] objects) {
-        super(context, R.layout.app_row);
-        init(context);
-
-        if (objects != null) {
-            addAll(prepareObjects(Arrays.asList(objects)));
-        }
-    }
-
     public ActivityArrayAdapter(Context context, List<ActivityInfo> objects) {
-        super(context, R.layout.app_row);
-        init(context);
-        if (objects != null) {
-            addAll(prepareObjects(objects));
-        }
+        super(context, new ArrayList<ActivityInfo>());
+        this.packageManager = context.getPackageManager();
+        resetData(prepareData(objects));
+        setViewResource(R.layout.app_row);
+        setDropDownViewResource(R.layout.app_row_dropdown);
     }
 }

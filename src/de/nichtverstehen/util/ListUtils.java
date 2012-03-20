@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Collections {
+public class ListUtils {
+
+    public interface Predicate<T> {
+        boolean apply(T type);
+    }
 
     public static <T> List<T> filter(Collection<T> target, Predicate<T> predicate) {
         List<T> result = new ArrayList<T>();
@@ -14,6 +18,14 @@ public class Collections {
             }
         }
         return result;
+    }
+    
+    public static <T> ArrayList<T> makeNullList(int size) {
+        ArrayList<T> l = new ArrayList<T>(size);
+        for (int i = 0; i < size; ++i) {
+            l.add(null);
+        }
+        return l;
     }
 
 }

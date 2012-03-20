@@ -29,21 +29,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/de/nichtverstehen/ActivityShortcut.java" line="68" class="de.nichtverstehen.ActivityShortcut$3" package="de.nichtverstehen">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="false" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
     <breakpoint_any>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -84,10 +69,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ActivityShortcut.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ActivityShortcut.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/ActivityShortcut.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="43" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.0">
+            <state line="60" column="24" selection-start="2414" selection-end="2414" vertical-scroll-proportion="1.2689805">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,20 +80,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomizableArrayAdapter.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/util/CustomizableArrayAdapter.java">
+      <file leaf-file-name="Spinner.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/Spinner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="312" selection-end="312" vertical-scroll-proportion="0.11056511">
+            <state line="374" column="17" selection-start="12961" selection-end="12961" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/SimpleAdapter.java">
+      <file leaf-file-name="ListUtils.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/util/ListUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="380" column="31" selection-start="0" selection-end="14400" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="11" column="0" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CustomizableArrayAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/util/CustomizableArrayAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="148" column="33" selection-start="4132" selection-end="4132" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -185,15 +183,16 @@
         <option value="/Developer/android-sdk/sources/android-14/android/widget/ArrayAdapter.java" />
         <option value="$PROJECT_DIR$/res/layout/app_row_dropdown.xml" />
         <option value="$PROJECT_DIR$/res/layout/app_row.xml" />
-        <option value="$PROJECT_DIR$/src/de/nichtverstehen/util/Predicate.java" />
-        <option value="$PROJECT_DIR$/src/de/nichtverstehen/util/Collections.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/de/nichtverstehen/PrepareIntent.java" />
-        <option value="$PROJECT_DIR$/src/de/nichtverstehen/ActivityShortcut.java" />
+        <option value="$PROJECT_DIR$/src/de/nichtverstehen/util/Collections.java" />
         <option value="$PROJECT_DIR$/src/de/nichtverstehen/util/CustomizableArrayAdapter.java" />
+        <option value="$PROJECT_DIR$/src/de/nichtverstehen/util/Predicate.java" />
+        <option value="$PROJECT_DIR$/src/de/nichtverstehen/util/ListUtils.java" />
+        <option value="$PROJECT_DIR$/src/de/nichtverstehen/ActivityShortcut.java" />
       </list>
     </option>
   </component>
@@ -208,7 +207,7 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="y" value="22" />
     <option name="width" value="1436" />
     <option name="height" value="878" />
   </component>
@@ -223,7 +222,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
@@ -238,6 +237,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -367,15 +367,14 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="OverrideImplement.combined" value="true" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
@@ -545,37 +544,38 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="73ec7265-bc61-42b9-9a1c-6113c4b9cc75" name="Default" comment="" />
       <created>1332233755538</created>
       <updated>1332233755538</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1436" height="878" extended-state="0" />
+    <frame x="0" y="22" width="1436" height="878" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.67193675" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3992095" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992095" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.67193675" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964029" sideWeight="0.6007905" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24927954" sideWeight="0.67193675" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32806325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32938075" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294964" sideWeight="0.67193675" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32938075" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -634,13 +634,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../Launcher2/src/com/android/launcher2/Workspace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="469" column="33" selection-start="18144" selection-end="18144" vertical-scroll-proportion="-7.8611712">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Launcher2/src/com/android/launcher2/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1560" column="37" selection-start="60241" selection-end="60241" vertical-scroll-proportion="0.0">
@@ -653,9 +646,7 @@
     </entry>
     <entry file="file:///Developer/android-sdk/sources/android-14/android/content/pm/PackageManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2035" column="33" selection-start="84533" selection-end="84533" vertical-scroll-proportion="0.29934925">
-          <folding />
-        </state>
+        <state line="2035" column="33" selection-start="84533" selection-end="84533" vertical-scroll-proportion="0.29934925" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/app_row.xml">
@@ -665,39 +656,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/util/Predicate.java">
+    <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/ArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="33" selection-end="33" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="28" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/app_row_dropdown.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="44" selection-start="207" selection-end="273" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="46" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="41" selection-start="1379" selection-end="1379" vertical-scroll-proportion="0.0">
+        <state line="58" column="7" selection-start="2432" selection-end="2432" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -716,40 +677,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/ActivityShortcut.java">
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="43" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="7" column="46" selection-start="397" selection-end="397" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/ArrayAdapter.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="7" selection-start="2432" selection-end="2432" vertical-scroll-proportion="0.0">
+        <state line="33" column="41" selection-start="1379" selection-end="1379" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/app_row_dropdown.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="44" selection-start="207" selection-end="273" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/Filter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="22" selection-start="1392" selection-end="1392" vertical-scroll-proportion="0.33239436">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/BaseAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="16" selection-start="1742" selection-end="1742" vertical-scroll-proportion="0.33169532">
+        <state line="81" column="22" selection-start="2586" selection-end="2586" vertical-scroll-proportion="1.2746478">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/SimpleAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="380" column="31" selection-start="0" selection-end="14400" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="193" column="28" selection-start="7579" selection-end="7758" vertical-scroll-proportion="0.8873239">
+          <folding>
+            <element signature="e#0#14400#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/util/CustomizableArrayAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="312" selection-end="312" vertical-scroll-proportion="0.11056511">
+        <state line="148" column="33" selection-start="4132" selection-end="4132" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/util/ListUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Developer/android-sdk/sources/android-14/android/widget/Spinner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="374" column="17" selection-start="12961" selection-end="12961" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/de/nichtverstehen/ActivityShortcut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="24" selection-start="2414" selection-end="2414" vertical-scroll-proportion="1.2689805">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
