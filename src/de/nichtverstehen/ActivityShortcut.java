@@ -33,12 +33,12 @@ public class ActivityShortcut extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.shortcut_prompt);
         setContentView(R.layout.main);
 
         packageManager = getPackageManager();
         appSpinner = (Spinner) findViewById(R.id.app_spinner);
         activitySpinner = (Spinner) findViewById(R.id.activity_spinner);
-        final Button testButton = (Button) findViewById(R.id.test_item);
 
         List<PackageInfo> apps = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
         final ApplicationArrayAdapter appsListAdapter = new ApplicationArrayAdapter(this, apps);
@@ -62,6 +62,7 @@ public class ActivityShortcut extends Activity {
             }
         });
 
+        Button testButton = (Button) findViewById(R.id.test_item);
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
