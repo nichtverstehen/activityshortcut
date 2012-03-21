@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Activity Shortcut</string>
-    <string name="prepare_intent_name">Add custom shortcut</string>
+    <string name="shortcut_prompt">Add custom shortcut</string>
     <string name="app_prompt">Select application</string>
     <string name="activity_prompt">Select activity</string>
     <string name="activity_block_title">Component</string>
