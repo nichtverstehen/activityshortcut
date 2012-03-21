@@ -181,7 +181,7 @@ class ApplicationArrayAdapter extends CustomizableArrayAdapter<PackageInfo> {
         return packageManager.getApplicationLabel(item.applicationInfo);
     }
 
-    protected List<PackageInfo> prepareData(List<PackageInfo> objects) {
+    private List<PackageInfo> prepareData(List<PackageInfo> objects) {
         Collections.sort(objects, new Comparator<PackageInfo>() {
             @Override
             public int compare(PackageInfo lhs, PackageInfo rhs) {
@@ -218,7 +218,11 @@ class ActivityArrayAdapter extends CustomizableArrayAdapter<ActivityInfo> {
         CharSequence label = getLabel(item);
         CharSequence description = getDescription(item);
         Drawable icon = getIcon(item);
-        CharSequence className = item.name;
+        String className = item.name;
+        String pkgName = item.packageName;
+        if (className.startsWith(pkgName)) {
+            className = className.substring(pkgName.length());
+        }
 
         CharSequence title;
         CharSequence info;
@@ -255,7 +259,7 @@ class ActivityArrayAdapter extends CustomizableArrayAdapter<ActivityInfo> {
                 activity.icon, activity.applicationInfo);
     }
 
-    protected List<ActivityInfo> prepareData(List<ActivityInfo> objects) {
+    private List<ActivityInfo> prepareData(List<ActivityInfo> objects) {
         List<ActivityInfo> filtered = ListUtils.filter(objects,
                 new ListUtils.Predicate<ActivityInfo>() {
                     @Override
