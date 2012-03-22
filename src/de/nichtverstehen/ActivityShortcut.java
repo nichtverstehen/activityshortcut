@@ -27,6 +27,7 @@ public class ActivityShortcut extends Activity {
     Spinner appSpinner;
     Spinner activitySpinner;
     PackageManager packageManager;
+    Intent startIntent;
     public final static String INSTALL_SHORTCUT_ACTION = "com.android.launcher.action.INSTALL_SHORTCUT";
 
     @Override
@@ -36,9 +37,10 @@ public class ActivityShortcut extends Activity {
         setTitle(R.string.shortcut_prompt);
         setContentView(R.layout.main);
 
-        packageManager = getPackageManager();
-        appSpinner = (Spinner) findViewById(R.id.app_spinner);
-        activitySpinner = (Spinner) findViewById(R.id.activity_spinner);
+        this.startIntent = getIntent();
+        this.packageManager = getPackageManager();
+        this.appSpinner = (Spinner) findViewById(R.id.app_spinner);
+        this.activitySpinner = (Spinner) findViewById(R.id.activity_spinner);
 
         List<PackageInfo> apps = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
         final ApplicationArrayAdapter appsListAdapter = new ApplicationArrayAdapter(this, apps);
@@ -69,16 +71,6 @@ public class ActivityShortcut extends Activity {
                 onTest();
             }
         });
-
-        /*IntentFilter filter = new IntentFilter(INSTALL_SHORTCUT_ACTION);
-        registerReceiver(new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Intent shIntent = (Intent) intent.getExtras().get(Intent.EXTRA_SHORTCUT_INTENT);
-                Log.e("Act", intent.toString());
-            }
-        }, filter);*/
     }
 
     @Override
@@ -133,8 +125,15 @@ public class ActivityShortcut extends Activity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        intent.setAction(INSTALL_SHORTCUT_ACTION);
-        sendBroadcast(intent);
+
+        if (startIntent != null
+                && startIntent.getAction() == Intent.ACTION_CREATE_SHORTCUT) {
+            setResult(RESULT_OK, intent);
+        }
+        else {
+            intent.setAction(INSTALL_SHORTCUT_ACTION);
+            sendBroadcast(intent);
+        }
 
         finish();
     }
