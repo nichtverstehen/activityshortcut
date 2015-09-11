@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_activityshortcut" default="compile.module.activityshortcut">
+  <dirname property="module.activityshortcut.basedir" file="${ant.file.module_activityshortcut}"/>
+  
+  <property name="module.jdk.home.activityshortcut" value="${jdk.home.android_api_20_platform}"/>
+  <property name="module.jdk.bin.activityshortcut" value="${jdk.bin.android_api_20_platform}"/>
+  <property name="module.jdk.classpath.activityshortcut" value="jdk.classpath.android_api_20_platform"/>
+  
+  <property name="compiler.args.activityshortcut" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="activityshortcut.output.dir" value="${module.activityshortcut.basedir}/out/production/ActivityShortcut"/>
+  <property name="activityshortcut.testoutput.dir" value="${module.activityshortcut.basedir}/out/test/ActivityShortcut"/>
+  
+  <path id="activityshortcut.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="activityshortcut.module.production.classpath">
+    <path refid="${module.jdk.classpath.activityshortcut}"/>
+  </path>
+  
+  <path id="activityshortcut.runtime.production.module.classpath">
+    <pathelement location="${activityshortcut.output.dir}"/>
+  </path>
+  
+  <path id="activityshortcut.module.classpath">
+    <path refid="${module.jdk.classpath.activityshortcut}"/>
+    <pathelement location="${activityshortcut.output.dir}"/>
+  </path>
+  
+  <path id="activityshortcut.runtime.module.classpath">
+    <pathelement location="${activityshortcut.testoutput.dir}"/>
+    <pathelement location="${activityshortcut.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.activityshortcut">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.activityshortcut">
+    <patternset refid="excluded.from.module.activityshortcut"/>
+  </patternset>
+  
+  <path id="activityshortcut.module.sourcepath">
+    <dirset dir="${module.activityshortcut.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.activityshortcut" depends="compile.module.activityshortcut.production,compile.module.activityshortcut.tests" description="Compile module ActivityShortcut"/>
+  
+  <target name="compile.module.activityshortcut.production" depends="register.custom.compilers" description="Compile module ActivityShortcut; production classes">
+    <mkdir dir="${activityshortcut.output.dir}"/>
+    <javac2 destdir="${activityshortcut.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.activityshortcut}/javac">
+      <compilerarg line="${compiler.args.activityshortcut}"/>
+      <bootclasspath refid="activityshortcut.module.bootclasspath"/>
+      <classpath refid="activityshortcut.module.production.classpath"/>
+      <src refid="activityshortcut.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.activityshortcut"/>
+    </javac2>
+    
+    <copy todir="${activityshortcut.output.dir}">
+      <fileset dir="${module.activityshortcut.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.activityshortcut.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.activityshortcut.tests" depends="register.custom.compilers,compile.module.activityshortcut.production" description="compile module ActivityShortcut; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.activityshortcut" description="cleanup module">
+    <delete dir="${activityshortcut.output.dir}"/>
+    <delete dir="${activityshortcut.testoutput.dir}"/>
+  </target>
+</project>
